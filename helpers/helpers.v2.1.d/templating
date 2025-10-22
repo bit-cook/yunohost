@@ -410,11 +410,11 @@ ynh_write_var_in_file() {
         fi
 
         # String
-        if [[ "$formated" == "false" ]] && [[ "$value" == *"'"* || "$value" == *'"'* || "$value" =~ $comments || "$ext" =~ ^php|py|json|js$ ]] ; then
+        if [[ "$formated" == "false" ]] && [[ "$value" == *"'"* || "$value" == *'"'* || "$value" =~ $comments || "$ext" =~ ^php|py|json|js$ ]]; then
             value='\"'"$(echo "$value" | sed 's/"/\\\\"/g')"'\"'
             formated="true"
         fi
- 
+
         if [[ "$ext" =~ ^yaml|yml$ ]]; then
             value=" $value"
         fi
