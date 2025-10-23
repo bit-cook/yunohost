@@ -35,7 +35,7 @@ do_init_regen() {
     # i.e. that it doesn't re-shuffle the file everytime we run the regenconf
     SEED=$( (
              cat /etc/machine-id || true
-                                          date +%m%Y 
+                                          date +%m%Y
     )                                                  | md5sum)
     cat plain/resolv.dnsmasq.conf | grep "^nameserver" | shuf --random-source=<(echo $SEED) > /etc/resolv.dnsmasq.conf
     chown root /etc/resolv.dnsmasq.conf
@@ -77,7 +77,7 @@ do_pre_regen() {
     # i.e. that it doesn't re-shuffle the file everytime we run the regenconf
     SEED=$( (
              cat /etc/machine-id || true
-                                          date +%m%Y 
+                                          date +%m%Y
     )                                                  | md5sum)
     cat plain/resolv.dnsmasq.conf | grep "^nameserver" | shuf --random-source=<(echo $SEED) > "${pending_dir}/etc/resolv.dnsmasq.conf"
 
