@@ -244,9 +244,15 @@ class MyMigration(Migration):
         # logger.debug(f"Running: {command}")
         # os.system(command)
 
-        # aptitude_with_progress_bar(
-        #     "full-upgrade luajit- libluajit-5.1-2- --show-why -o APT::Force-LoopBreak=1 -o Dpkg::Options::='--force-confold'"
-        # )
+        packages_problematic = [
+            "libluajit2-5.1-2- libluajit2-5.1-common- libluajit-5.1-2+M libluajit-5.1-common+M",
+        ] + self.apt_t64_packages_list()
+
+        packages_problematic_str = " ".join(packages_problematic)
+
+        aptitude_with_progress_bar(
+            f"full-upgrade {packages_problematic_str} --show-why -o APT::Force-LoopBreak=1 -o Dpkg::Options::='--force-confold'"
+        )
 
         # For some reason aptitude is derping about python3 / python3-venv so try to explicitly tell to install python3.11 to replace 3.9...
         # Note the '+M' prefix which is here to mark the packages as automatically installed
@@ -579,6 +585,20 @@ you have any. However, the new system also has plenty of customization capabilit
         """)
         )
         policy_rc.chmod(755)
+
+    def apt_t64_packages_list(self) -> list[str]:
+        # https://media1.tenor.com/m/vzLCBSJxywUAAAAd/quelle-indignit%C3%A9-sarkozy.gif
+
+        installed_packages = check_output("apt list --installed 2>/dev/null | grep -v -F 'Listing...' | awk -F/ '{print $1}'", shell=True).strip().split("\n")
+        t64_packages = check_output("apt search '.*t64' 2>/dev/null | grep 't64/' | awk -F/ '{print $1}'", shell=True).strip().split("\n")
+
+        t64_upgrades = []
+        for t64_package in t64_packages:
+            package = t64_package.replace("t64", "")
+            if package in installed_packages:
+                t64_upgrades += [package + "-", t64_package + "+M"]
+
+        return t64_upgrades
 
     def get_apps_equivs_packages(self):
         command = (
