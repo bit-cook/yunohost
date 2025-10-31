@@ -1,3 +1,12 @@
+yunohost (12.1.33) stable; urgency=low
+
+  - upgrades: when parsing package<->section lines, try to gracefully handle edgecase were there's more than 2 items to split (17a11b12a)
+  - i18n: Translations updated for Catalan, French, Galician
+
+  Thanks to all contributors <3 ! (Francescc, José M, ppr)
+
+ -- Alexandre Aubin <alex.aubin@mailoo.org>  Fri, 31 Oct 2025 13:38:22 +0100
+
 yunohost (12.1.32.1) stable; urgency=low
 
   - helpers/templating: fixes boolean detection (d3dbdfa45)
