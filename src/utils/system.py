@@ -248,7 +248,9 @@ def _group_packages_per_categories(
         if " " in line:
             package, category = line.split(" ", 1)
             if " " in category:
-                logger.warning(f"Hmm? Not sure what's the deal with category '{category}' for package '{package}' ? Raw original line is: {line}")
+                logger.warning(
+                    f"Hmm? Not sure what's the deal with category '{category}' for package '{package}' ? Raw original line is: {line}"
+                )
         else:
             package, category = line, "?"
         if "yunohost" in package or package in ["moulinette", "ssowat"]:
