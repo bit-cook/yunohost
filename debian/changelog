@@ -1,3 +1,17 @@
+yunohost (12.1.35) stable; urgency=low
+
+  - i18n/doc: update yunohost.org urls such that they point directly to the new doc on doc.yunohost.org etc (4ca736130)
+  - debian/mail: Apparently using email relay requires libsasl2-modules in some context (69a2b95b8)
+  - helpers: split ynh_local_curl to have a low-level version to cover elaborate usecases where packagers want to pass arbitrary curl options and headers, not just post data (7898db59a)
+  - trixie: Fix pip freeze call of subprocess (9d2627d54)
+  - trixie: Reorganize the steps * First run the pip, debconf-set-selections, chattr, apt hold, etc * Then run the apt/dpkg patching, at the last possible moment before apt update/uprgade (7b37187bf)
+  - helpers: utils: add quotes for shellcheck (c796a7eef)
+  - i18n: Translations updated for Basque, Catalan, Galician
+
+  Thanks to all contributors <3 ! (Félix Piédallu, Francescc, José M, xabirequejo)
+
+ -- Alexandre Aubin <alex.aubin@mailoo.org>  Fri, 07 Nov 2025 15:29:25 +0100
+
 yunohost (12.1.34) stable; urgency=low
 
   - migrations: Add draft, "hidden" migration to Trixie ([#2216](http://github.com/YunoHost/yunohost/pull/2216), 97c9c2ca2, c90e7264a, ca7d9dc1d)
