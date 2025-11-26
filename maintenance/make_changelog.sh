@@ -41,7 +41,7 @@ function increment_version() {
         echo "$major.$((medium+1)).0"
     else
         echo "Unhandled version increment type '$incr_type', should be either 'patch', 'minor' or 'medium'" >&2
-        exit -1
+        exit 1
     fi
 }
 
@@ -65,7 +65,7 @@ fi
 RELEASE_TYPE="${2:-}"
 if [[ -n "$RELEASE_TYPE" ]]
 then
-    [[ $RELEASE_TYPE == "stable" ]] || [[ $RELEASE_TYPE == "testing" ]] || ( echo "Release type should be either 'stable' or 'testing'" >&2; exit -1; )
+    [[ $RELEASE_TYPE == "stable" ]] || [[ $RELEASE_TYPE == "testing" ]] || ( echo "Release type should be either 'stable' or 'testing'" >&2; exit 1; )
     NEW_RELEASE_TYPE=$RELEASE_TYPE
 else
     NEW_VERSION_TYPE=$CURRENT_RELEASE_TYPE
@@ -80,17 +80,17 @@ PREVIOUS_TAG="debian/$CURRENT_VERSION"
 COMMITS=$(git log "$PREVIOUS_TAG".. -n 10000 --first-parent --pretty=tformat:'%h')
 for COMMIT in $COMMITS
 do
-    SUBJECT="$(git show -s $COMMIT --pretty="%s")"
+    SUBJECT="$(git show -s "$COMMIT" --pretty="%s")"
     # "Regular" PRs merge commit
-    if grep -q "^Merge pull request #" <<< $SUBJECT
+    if grep -q "^Merge pull request #" <<< "$SUBJECT"
     then
-        PR_LINK=$(sed -E "s@Merge .*#([0-9]+).*\$@[#\1]\(http://github.com/YunoHost/$REPO/pull/\1\)@g" <<< $SUBJECT)
-        BODY="$(git show -s $COMMIT --pretty="%b")"
+        PR_LINK=$(sed -E "s@Merge .*#([0-9]+).*\$@[#\1]\(http://github.com/YunoHost/$REPO/pull/\1\)@g" <<< "$SUBJECT")
+        BODY="$(git show -s "$COMMIT" --pretty="%b")"
         echo "  - $BODY ($PR_LINK)"
     # PRs merged via stash
-    elif grep -q " (#[0-9]*)$" <<< $SUBJECT
+    elif grep -q " (#[0-9]*)$" <<< "$SUBJECT"
     then
-        SUBJECT=$(sed -E "s@(.*) \(#([0-9]*)\)\$@\1 ([#\2]\(http://github.com/YunoHost/$REPO/pull/\2\))@g" <<< $SUBJECT)
+        SUBJECT=$(sed -E "s@(.*) \(#([0-9]*)\)\$@\1 ([#\2]\(http://github.com/YunoHost/$REPO/pull/\2\))@g" <<< "$SUBJECT")
         echo "  - $SUBJECT"
     # Other "direct" commits
     else
