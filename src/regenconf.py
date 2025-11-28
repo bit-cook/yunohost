@@ -80,7 +80,7 @@ def regen_conf(
 
     if names is None:
         names = []
-    elif isinstance(names, list):
+    elif names and isinstance(names, list):
         unknowns = [
             name for name in names if name not in all_available_conf_regen_categories
         ]
