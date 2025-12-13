@@ -25,11 +25,19 @@ import subprocess
 from collections.abc import Generator
 from typing import Any
 
+from ..app_catalog import SecurityIssueInfos, _load_security_issues_list
 from ..diagnosis import Diagnoser
 from ..utils.file_utils import read_file, read_json, write_to_json
 from ..utils.process import check_output
-from ..utils.system import debian_version, system_arch, system_virt, ynh_packages_version, dpkg_list_installed_packages, dpkg_package_version, dpkg_compare_version
-from ..app_catalog import _load_security_issues_list, SecurityIssueInfos
+from ..utils.system import (
+    debian_version,
+    dpkg_compare_version,
+    dpkg_list_installed_packages,
+    dpkg_package_version,
+    system_arch,
+    system_virt,
+    ynh_packages_version,
+)
 
 logger = logging.getLogger("yunohost.diagnosis")
 
@@ -321,9 +329,10 @@ class MyDiagnoser(Diagnoser):  # type: ignore
             return ""
 
     def security_issues(self):
-
         installed_packages = dpkg_list_installed_packages()
-        security_issues_list_per_pkg: dict[str, list[SecurityIssueInfos]] = _load_security_issues_list()["system"]
+        security_issues_list_per_pkg: dict[str, list[SecurityIssueInfos]] = (
+            _load_security_issues_list()["system"]
+        )
         for package, issues in security_issues_list_per_pkg.items():
             if package not in installed_packages:
                 continue
@@ -333,7 +342,9 @@ class MyDiagnoser(Diagnoser):  # type: ignore
                 raw_fixed_in_version = issue["fixed_in_version"]
                 if isinstance(raw_fixed_in_version, dict):
                     if debian_version() not in raw_fixed_in_version:
-                        logger.warning(f"Not able to check versions in which security issue is fixed for package '{package}' (no version specified for Debian {debian_version()})")
+                        logger.warning(
+                            f"Not able to check versions in which security issue is fixed for package '{package}' (no version specified for Debian {debian_version()})"
+                        )
                         continue
                     fixed_in_version = raw_fixed_in_version[debian_version()]
                 else:
@@ -344,15 +355,19 @@ class MyDiagnoser(Diagnoser):  # type: ignore
                     continue
 
                 level = "error" if issue["level"] == "danger" else "warning"
-                if isinstance(issue['more_infos'], list):
-                    more_infos_list = ", ".join(issue['more_infos'])
+                if isinstance(issue["more_infos"], list):
+                    more_infos_list = ", ".join(issue["more_infos"])
                 else:
-                    more_infos_list = issue['more_infos']
+                    more_infos_list = issue["more_infos"]
                 yield dict(
                     meta={"package": package},
                     status=level.upper(),
                     # i18n: diagnosis_package_security_issue_warning
                     # i18n: diagnosis_package_security_issue_error
                     summary=f"diagnosis_package_security_issue_{level}",
-                    data={**issue, "more_infos_list": more_infos_list, "current_version": current_version},
+                    data={
+                        **issue,
+                        "more_infos_list": more_infos_list,
+                        "current_version": current_version,
+                    },
                 )

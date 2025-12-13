@@ -47,8 +47,12 @@ SECURITY_INDEX_SUPPORTED_VERSION = 1
 class SecurityIssueInfos(TypedDict):
     date: str
     title: str
-    more_infos: str | list[str]  # typically an URL, for example a forum thread or github issue
-    fixed_in_version: str | dict[Literal["bookworm", "trixie"], str]  # eg "1.2.3~ynh1" or "2.2.27-3+deb9u5"
+    more_infos: (
+        str | list[str]
+    )  # typically an URL, for example a forum thread or github issue
+    fixed_in_version: (
+        str | dict[Literal["bookworm", "trixie"], str]
+    )  # eg "1.2.3~ynh1" or "2.2.27-3+deb9u5"
     level: Literal["warning", "error"]
 
 
@@ -56,7 +60,9 @@ class AppCatalog(TypedDict):
     apps: dict[str, dict[str, Any]]
     categories: NotRequired[list[dict[str, Any]]]
     antifeatures: NotRequired[list[dict[str, Any]]]
-    security: NotRequired[dict[Literal['apps', 'system'], dict[str, list[SecurityIssueInfos]]]]
+    security: NotRequired[
+        dict[Literal["apps", "system"], dict[str, list[SecurityIssueInfos]]]
+    ]
     from_api_version: NotRequired[int]
 
 
@@ -361,8 +367,9 @@ def _load_apps_catalog() -> AppCatalog:
     return merged_catalog
 
 
-def _load_security_issues_list() -> dict[Literal["apps", "system"], dict[str, list[SecurityIssueInfos]]]:
-
+def _load_security_issues_list() -> dict[
+    Literal["apps", "system"], dict[str, list[SecurityIssueInfos]]
+]:
     apps_issues: dict[str, list[SecurityIssueInfos]] = {}
     system_issues: dict[str, list[SecurityIssueInfos]] = {}
 
@@ -380,16 +387,26 @@ def _load_security_issues_list() -> dict[Literal["apps", "system"], dict[str, li
                 raw_msg=True,
             )
 
-        security_index: dict[Literal['apps', 'system'], dict[str, list[SecurityIssueInfos]]] | None = content.get("security")
-        security_index_version: int | None = security_index.get("version") if security_index else None  # type: ignore[index,call-overload]
+        security_index: (
+            dict[Literal["apps", "system"], dict[str, list[SecurityIssueInfos]]] | None
+        ) = content.get("security")
+        security_index_version: int | None = (
+            security_index.get("version") if security_index else None
+        )  # type: ignore[index,call-overload]
         # Even if not mentioned in the typing, security_index has a "version" key
         if security_index_version != SECURITY_INDEX_SUPPORTED_VERSION:
             if security_index_version is None:
-                logger.warning(f"Catalog '{apps_catalog_id}' is missing the security vulnerability index. Please contact the people maintaing this catalog.")
+                logger.warning(
+                    f"Catalog '{apps_catalog_id}' is missing the security vulnerability index. Please contact the people maintaing this catalog."
+                )
             elif security_index_version > SECURITY_INDEX_SUPPORTED_VERSION:
-                logger.warning(f"In catalog {apps_catalog_id}, the security index info is too recent. You should probably upgrade YunoHost.")
+                logger.warning(
+                    f"In catalog {apps_catalog_id}, the security index info is too recent. You should probably upgrade YunoHost."
+                )
             elif security_index_version < SECURITY_INDEX_SUPPORTED_VERSION:
-                logger.warning(f"Security index format from catalog '{apps_catalog_id}' is too old, please contact the people maintaining it to upgrade it to the recent standards?")
+                logger.warning(
+                    f"Security index format from catalog '{apps_catalog_id}' is too old, please contact the people maintaining it to upgrade it to the recent standards?"
+                )
             continue
 
         assert security_index is not None

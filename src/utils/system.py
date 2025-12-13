@@ -22,13 +22,14 @@ import logging
 import os
 import re
 import subprocess
-from debian import debian_support
 from collections.abc import Generator
 from functools import cache
 from pathlib import Path
 from typing import Any, Literal
 
 from moulinette import Moulinette
+
+from debian import debian_support
 
 from ..utils.error import YunohostError
 from .process import check_output
@@ -57,7 +58,7 @@ def debian_version_id() -> Literal[12, 13]:
 
 
 @cache
-def system_arch() -> Literal['amd64', 'i386', 'armhf', 'arm64']:
+def system_arch() -> Literal["amd64", "i386", "armhf", "arm64"]:
     command = "dpkg --print-architecture 2>/dev/null"
     return check_output(command)  # type: ignore[return-value]
 
@@ -68,7 +69,9 @@ def dpkg_list_installed_packages() -> list[str]:
 
 
 def dpkg_package_version(package):
-    return check_output("dpkg-query --showformat='${Version}' --show " + package).strip()
+    return check_output(
+        "dpkg-query --showformat='${Version}' --show " + package
+    ).strip()
 
 
 def dpkg_compare_version(a, b) -> Literal[-1, 0, 1]:

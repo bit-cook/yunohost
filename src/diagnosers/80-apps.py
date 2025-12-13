@@ -18,13 +18,14 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 
-import os
 import logging
+import os
+
 from packaging import version
 
-from ..app import APPS_SETTING_PATH, app_list, AppInfo
+from ..app import APPS_SETTING_PATH, AppInfo, app_list
+from ..app_catalog import SecurityIssueInfos, _load_security_issues_list
 from ..diagnosis import Diagnoser
-from ..app_catalog import _load_security_issues_list, SecurityIssueInfos
 from ..utils.system import debian_version
 
 logger = logging.getLogger("yunohost.diagnosis")
@@ -60,14 +61,17 @@ class MyDiagnoser(Diagnoser):
                 )
 
                 yield dict(
-                    meta={"test": "apps", "app": app["name"], "installed_version": app["version"]},
+                    meta={
+                        "test": "apps",
+                        "app": app["name"],
+                        "installed_version": app["version"],
+                    },
                     status=level,
                     summary="diagnosis_apps_issue",
                     details=[issue[1] for issue in app["issues"]],
                 )
 
     def issues(self, app: AppInfo):
-
         def app_version_parse(v: str) -> tuple:
             if "~" in v:
                 raw_upstream_version, raw_ynh_version = v.split("~ynh", 1)
@@ -82,28 +86,44 @@ class MyDiagnoser(Diagnoser):
         app_base_id = app["manifest"]["id"]
         if app_base_id in self.security_issues_list_per_app:
             app_version = app_version_parse(app["version"])
-            security_issues_for_this_app: list[SecurityIssueInfos] = self.security_issues_list_per_app[app_base_id]
+            security_issues_for_this_app: list[SecurityIssueInfos] = (
+                self.security_issues_list_per_app[app_base_id]
+            )
             for issue in security_issues_for_this_app:
                 raw_fixed_in_version = issue["fixed_in_version"]
                 if isinstance(raw_fixed_in_version, dict):
                     if debian_version() not in issue["fixed_in_version"]:
-                        logger.warning(f"Not able to check versions in which security issue is fixed for app '{app_base_id}' (no version specified for Debian {debian_version()})")
+                        logger.warning(
+                            f"Not able to check versions in which security issue is fixed for app '{app_base_id}' (no version specified for Debian {debian_version()})"
+                        )
                         continue
-                    fixed_in_version = app_version_parse(raw_fixed_in_version[debian_version()])
+                    fixed_in_version = app_version_parse(
+                        raw_fixed_in_version[debian_version()]
+                    )
                 else:
                     fixed_in_version = app_version_parse(raw_fixed_in_version)
 
                 if app_version >= fixed_in_version:
                     continue
                 level = "error" if issue["level"] == "danger" else "warning"
-                if isinstance(issue['more_infos'], list):
-                    more_infos_list = ", ".join(issue['more_infos'])
+                if isinstance(issue["more_infos"], list):
+                    more_infos_list = ", ".join(issue["more_infos"])
                 else:
-                    more_infos_list = issue['more_infos']
+                    more_infos_list = issue["more_infos"]
 
                 # i18n: diagnosis_apps_security_issue_warning
                 # i18n: diagnosis_apps_security_issue_error
-                yield (level, (f"diagnosis_apps_security_issue_{level}", {**issue, "more_infos_list": more_infos_list, "current_version": app["version"]}))
+                yield (
+                    level,
+                    (
+                        f"diagnosis_apps_security_issue_{level}",
+                        {
+                            **issue,
+                            "more_infos_list": more_infos_list,
+                            "current_version": app["version"],
+                        },
+                    ),
+                )
 
         # Check quality level in catalog
 
