@@ -1,3 +1,14 @@
+yunohost (12.1.37) stable; urgency=low
+
+  - security: introduce a new security issue list that is fetched alongside the catalog, such that the diagnosis reports a warning/error for older versions of apps (or system packagers) vulnerable to known security issues ([#2077](http://github.com/YunoHost/yunohost/pull/2077))
+  - regenconf: properly check that categories to regen exists, to remove confusion when people try to regenconf stuff that dont exist like 'ssowat' or whatever... (1285fb7ff)
+  - apps: improve app restore debugging with a new no-remove-on-failure option, similar to the one for install ([#2184](http://github.com/YunoHost/yunohost/pull/2184))
+  - apps/nginx: add include snippets for fastcgi params and proxy param with and without authentication headers ([#2163](http://github.com/YunoHost/yunohost/pull/2163))
+
+  Thanks to all contributors <3 ! (Josue-T)
+
+ -- Alexandre Aubin <alex.aubin@mailoo.org>  Thu, 18 Dec 2025 17:39:45 +0100
+
 yunohost (12.1.36) stable; urgency=low
 
   - bookworm->trixie: fix some issues encountered during migration ([#2227](http://github.com/YunoHost/yunohost/pull/2227))
