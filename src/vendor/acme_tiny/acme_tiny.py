@@ -65,7 +65,7 @@ def get_crt(
                         "User-Agent": "acme-tiny",
                     },
                 ),
-                timeout=5
+                timeout=5,
             )
             resp_data, code, headers = (
                 resp.read().decode("utf8"),
