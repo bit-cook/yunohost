@@ -14,6 +14,7 @@ proxy_set_header   Upgrade              $http_upgrade;
 proxy_set_header   Connection           $connection_upgrade;
 
 # Set Authentication header, in addition to the header by ssowat. Note ssowat inject YNH_USER and here we inject Ynh-User which is different.
+proxy_set_header   Authorization        $http_authorization;
 proxy_set_header   Ynh-User             $http_ynh_user;
 proxy_set_header   Ynh-User-Email       $http_ynh_user_email;
 proxy_set_header   Ynh-User-Fullname    $http_ynh_user_fullname;
