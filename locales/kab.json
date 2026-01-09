@@ -138,5 +138,6 @@
     "service_already_started": "Ameẓlu n '{service}' iteddu yakan",
     "service_started": "Ameẓlu n '{service}' yekker",
     "diagnosis_domain_expires_in": "{domain} ad ttfat akka {days} n wussan.",
-    "diagnosis_everything_ok": "Kra yellan yettban-d yelha i {category}!"
+    "diagnosis_everything_ok": "Kra yellan yettban-d yelha i {category}!",
+    "apps_catalog_updating": "Lqem n umucceḍ n ukaram n yesnasen…"
 }
