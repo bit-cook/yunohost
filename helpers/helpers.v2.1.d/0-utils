@@ -556,7 +556,7 @@ ynh_add_swap() {
 
 # Delete swap
 #
-# usage: ynh_del_swap 
+# usage: ynh_del_swap
 ynh_del_swap() {
     # If there a swap at this place
     if [ -e "/swap_$app" ]; then
