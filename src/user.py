@@ -110,8 +110,9 @@ def user_list(fields: list[str] | None = None) -> dict[str, dict[str, Any]]:
             if not group.startswith("cn=all_users,")
             and not group.startswith("cn=" + user["uid"][0] + ",")
         ],
-        "shell": lambda values, _: len(values) > 0
-        and values[0].strip() == "/bin/false",
+        "shell": lambda values, _: (
+            len(values) > 0 and values[0].strip() == "/bin/false"
+        ),
     }
 
     attrs = {"uid"}
