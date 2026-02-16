@@ -286,10 +286,12 @@ elif mode == "fix":
     for key in unused_keys:
         del j[key]
 
-    json.dump(
-        j,
-        open(REFERENCE_FILE, "w"),
-        indent=4,
-        ensure_ascii=False,
-        sort_keys=True,
-    )
+    with open(REFERENCE_FILE, "w") as reference:
+        json.dump(
+            j,
+            reference,
+            indent=4,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+        reference.write("\n")
