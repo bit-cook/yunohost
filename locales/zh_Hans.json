@@ -427,7 +427,7 @@
     "domain_dns_registrar_experimental": "到目前为止，**{registrar}** 的 API 接口尚未经过 YunoHost 社区的适当测试和审查。支持是 **非常实验性的** - 请小心！",
     "domain_dns_registrar_managed_in_parent_domain": "该域是 {parent_domain_link} 的子域。DNS 注册商配置应在 {parent_domain} 的配置面板中管理。",
     "domain_dns_registrar_not_supported": "YunoHost 无法自动检测处理此域的注册商。您应该根据 https://doc.yunohost.org/dns_config 的文档手动配置您的 DNS 记录。",
-    "domain_dns_registrar_supported": "YunoHost 自动检测到该域由注册商 **{registrar}** 处理。如果您愿意，YunoHost 将自动配置此 DNS 区域，只要您提供适当的 API 凭据。您可以在此页面上找到如何获取 API 凭据的文档：https://doc.yunohost.org/providers/registrar/{registrar}/autodns。（您也可以根据 https://doc.yunohost.org/dns_config 的文档手动配置您的 DNS 记录）",
+    "domain_dns_registrar_supported": "YunoHost 自动检测到该域由注册商 **{registrar}** 处理。如果您愿意，YunoHost 将自动配置此 DNS 区域，只要您提供适当的 API 凭据。您可以在此页面上找到如何获取 API 凭据的文档：https://doc.yunohost.org/admin/get_started/providers/registrar/{registrar}/。（您也可以根据 https://doc.yunohost.org/dns_config 的文档手动配置您的 DNS 记录）",
     "domain_dns_registrar_use_auto": "使用自动 DNS 功能",
     "domain_dns_registrar_yunohost": "该域名为 nohost.me / nohost.st / ynh.fr，因此其 DNS 配置由 YunoHost 自动处理，无需进一步配置。（参见 'yunohost dyndns update' 命令）",
     "domain_dyndns_already_subscribed": "您已经订阅了 DynDNS 域",

@@ -357,7 +357,7 @@
     "domain_dns_registrar_experimental": "これまでのところ、**{registrar}**のAPIとのインターフェースは、YunoHostコミュニティによって適切にテストおよびレビューされていません。サポートは**非常に実験的**です-注意してください!",
     "domain_dns_registrar_managed_in_parent_domain": "このドメインは{parent_domain_link}のサブドメインです。DNS レジストラーの構成は、{parent_domain}の設定パネルで管理する必要があります。",
     "domain_dns_registrar_not_supported": "YunoHost は、このドメインを処理するレジストラを自動的に検出できませんでした。DNS レコードは、https://doc.yunohost.org/dns_config のドキュメントに従って手動で構成する必要があります。",
-    "domain_dns_registrar_supported": "YunoHost は、このドメインがレジストラ **{registrar}** によって処理されていることを自動的に検出しました。必要に応じて適切なAPI資格情報を提供すると、YunoHostはこのDNSゾーンを自動的に構成します。API 資格情報の取得方法に関するドキュメントは、https://doc.yunohost.org/providers/registrar/{registrar}/autodns ページにあります。(https://doc.yunohost.org/dns_config のドキュメントに従ってDNSレコードを手動で構成することもできます)",
+    "domain_dns_registrar_supported": "YunoHost は、このドメインがレジストラ **{registrar}** によって処理されていることを自動的に検出しました。必要に応じて適切なAPI資格情報を提供すると、YunoHostはこのDNSゾーンを自動的に構成します。API 資格情報の取得方法に関するドキュメントは、https://doc.yunohost.org/admin/get_started/providers/registrar/{registrar}/ ページにあります。(https://doc.yunohost.org/dns_config のドキュメントに従ってDNSレコードを手動で構成することもできます)",
     "domain_dns_registrar_yunohost": "このドメインは nohost.me / nohost.st / ynh.fr であるため、DNS構成は特別な構成なしでYunoHostによって自動的に処理されます。(‘yunohost dyndns update’ コマンドを参照)",
     "domain_dyndns_already_subscribed": "すでに DynDNS ドメインにサブスクライブしています",
     "domain_exists": "この名前のバックアップアーカイブはすでに存在します",
