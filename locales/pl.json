@@ -641,5 +641,17 @@
     "log_backup_restore_app": "Przywróć '{}' z archiwum kopii zapasowej",
     "log_backup_restore_system": "Przywróć system z archiwum kopii zapasowej",
     "log_corrupted_md_file": "Plik metadanych YAML powiązany z dziennikami jest uszkodzony: '{md_file}\nBłąd: {error}'",
-    "log_diagnosis_run": "Uruchom diagnostykę"
+    "log_diagnosis_run": "Uruchom diagnostykę",
+    "log_does_exists": "Brak dziennika operacji o nazwie '{log}', użyj 'yunohost log list' aby zobaczyć wszystkie dostępne dzienniki operacji",
+    "log_domain_add": "Dodaj domenę '{}'",
+    "log_domain_config_set": "Zaktualizuj konfigurację dla domeny '{}'",
+    "log_domain_dns_push": "Prześlij rekordy DNS dla domeny '{}'",
+    "log_domain_main_domain": "Ustaw '{}' jako domenę główną",
+    "log_domain_remove": "Usuń domenę '{}'",
+    "log_dyndns_subscribe": "Zarejestruj subdomenę YunoHost '{}'",
+    "log_dyndns_unsubscribe": "Usuń subdomenę YunoHost '{}'",
+    "log_dyndns_update": "Zaktualizuj adres IP powiązany z subdomeną YunoHost '{}'",
+    "log_help_to_get_failed_log": "Nie udało się ukończyć operacji '{desc}'. Udostępnij pełny dziennik tej operacji za pomocą 'yunohost log share {name}' aby uzyskać pomoc",
+    "log_help_to_get_log": "Aby wyświetlić dziennik operacji '{desc}', użyj 'yunohost log show {name}'",
+    "log_letsencrypt_cert_install": "Zainstaluj certyfikat Let's Encrypt w domenie '{}'"
 }
