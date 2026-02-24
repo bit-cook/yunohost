@@ -631,5 +631,15 @@
     "ldap_server_is_down_restart_it": "Usługa LDAP jest wyłączona. Spróbuj ją ponownie uruchomić…",
     "log_app_action_run": "Uruchom akcję aplikacji '{}'",
     "log_app_change_url": "Zmień adres URL aplikacji '{}'",
-    "log_app_config_set": "Zastosuj konfigurację do aplikacji '{}'"
+    "log_app_config_set": "Zastosuj konfigurację do aplikacji '{}'",
+    "log_app_install": "Zainstaluj aplikację '{}'",
+    "log_app_makedefault": "Ustaw '{}' jako domyślną aplikację",
+    "log_app_remove": "Usuń aplikację '{}'",
+    "log_app_upgrade": "Zaktualizuj aplikację '{}'",
+    "log_available_on_yunopaste": "Ten dziennik jest teraz dostępny pod {url}",
+    "log_backup_create": "Utwórz archiwum kopii zapasowej",
+    "log_backup_restore_app": "Przywróć '{}' z archiwum kopii zapasowej",
+    "log_backup_restore_system": "Przywróć system z archiwum kopii zapasowej",
+    "log_corrupted_md_file": "Plik metadanych YAML powiązany z dziennikami jest uszkodzony: '{md_file}\nBłąd: {error}'",
+    "log_diagnosis_run": "Uruchom diagnostykę"
 }
