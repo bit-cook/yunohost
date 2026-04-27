@@ -186,5 +186,7 @@
     "migration_ldap_rollback_success": "Systém obnoven zpět.",
     "migrations_already_ran": "Tyto migrace jsou již hotové: {ids}",
     "migration_description_0029_postgresql_13_to_15": "Migrovat databáze z PostgreSQL 13 na 15",
-    "migration_description_0030_rebuild_python_venv_in_bookworm": "Opravit Python aplikace po migraci Debian 12 Bookworm"
+    "migration_description_0030_rebuild_python_venv_in_bookworm": "Opravit Python aplikace po migraci Debian 12 Bookworm",
+    "ask_admin_username": "Uživatelské jméno administrátora/ky",
+    "ask_dyndns_recovery_password": "DynDNS heslo pro obnovení"
 }
