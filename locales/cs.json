@@ -189,5 +189,13 @@
     "migration_description_0030_rebuild_python_venv_in_bookworm": "Opravit Python aplikace po migraci Debian 12 Bookworm",
     "ask_admin_username": "Uživatelské jméno administrátora/ky",
     "ask_dyndns_recovery_password": "DynDNS heslo pro obnovení",
-    "app_upgrade_app_name": "Nyní aktualizuji {app}…"
+    "app_upgrade_app_name": "Nyní aktualizuji {app}…",
+    "app_upgrade_some_app_failed": "Některé aplikace nemohou být aktualizovány",
+    "app_upgrade_several_apps": "Následující aplikace budou aktualizovány: {apps}",
+    "apps_already_up_to_date": "Všechny aplikace jsou aktuální",
+    "ask_main_domain": "Hlavní doména",
+    "ask_new_admin_password": "Nové heslo administrátora",
+    "ask_new_domain": "Nová doména",
+    "ask_new_path": "Nová cesta",
+    "ask_password": "Heslo"
 }
