@@ -216,5 +216,6 @@
     "domain_config_auth_consumer_key": "Spotřebitelský klíč",
     "domain_config_auth_entrypoint": "Vstupní bod API",
     "domain_config_auth_key": "Autentizační klíč",
-    "domain_config_auth_secret": "Autentizační tajemství"
+    "domain_config_auth_secret": "Autentizační tajemství",
+    "backup_archive_open_failed": "Nelze otevřít archiv zálohy"
 }
