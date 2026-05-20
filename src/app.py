@@ -1935,18 +1935,12 @@ password={password}
         fp.write(password_file_content.encode())
         fp.flush()
 
-        env_by_type = {
-            "mysql": {},
-            "postgresql": {"PGPASSFILE": fp.name}
-        }
+        env_by_type = {"mysql": {}, "postgresql": {"PGPASSFILE": fp.name}}
         command = {
             "mysql": ["mysql", f"--defaults-file={fp.name}", database],
-            "postgresql": ["psql", f"--user={user}"]
+            "postgresql": ["psql", f"--user={user}"],
         }
-        subprocess.run(
-            command[type],
-            env=env_by_type[type]
-        )
+        subprocess.run(command[type], env=env_by_type[type])
 
 
 def app_register_url(app: str, domain: str, path: str) -> None:
