@@ -347,7 +347,9 @@ class MyDiagnoser(Diagnoser):  # type: ignore
                 raw_kernel_comment = read_file("/proc/sys/kernel/version").strip()
                 version_matches = re.findall(r"\s[0-9]\S+", raw_kernel_comment)
                 if len(version_matches) != 1:
-                    logger.warning(f"Unable to extract mainline kernel version from the kernel info '{raw_kernel_comment}' ... Therefore YunoHost will be unable to check for security issues related to the kernel. Please try to report this message to the YunoHost team to improve the situation")
+                    logger.warning(
+                        f"Unable to extract mainline kernel version from the kernel info '{raw_kernel_comment}' ... Therefore YunoHost will be unable to check for security issues related to the kernel. Please try to report this message to the YunoHost team to improve the situation"
+                    )
                     continue
                 current_version = version_matches[0].strip()
                 # RPi have their mainline kernel version number somehow
