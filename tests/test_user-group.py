@@ -113,7 +113,12 @@ def test_list_groups():
 
 def test_create_user():
     with message("user_created"):
-        user_create("morgan-claude.good_7", maindomain, "test123Ynh", fullname="Morgan-Claude Good")
+        user_create(
+            "morgan-claude.good_7",
+            maindomain,
+            "test123Ynh",
+            fullname="Morgan-Claude Good",
+        )
 
     group_res = user_group_list()["groups"]
     assert "morgan-claude.good_7" in user_list()["users"]
